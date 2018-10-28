@@ -169,6 +169,10 @@ public class MainMenu : MonoBehaviour {
             invalid.SetActive(true);
         }
     }
+    public void GeneratedPlay()
+    {
+        SceneManager.LoadScene("Generated");
+    }
     public void PlayGame()
     {
         SceneManager.LoadScene("Level1");

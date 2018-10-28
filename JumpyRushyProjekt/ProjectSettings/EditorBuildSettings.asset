@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Level1.unity
     guid: fed65ddd9e8c73c4ab5750a134fd5509
   - enabled: 1
+    path: Assets/Generated.unity
+    guid: 9aaa8d8dc4ca7ff46b4dfe53574d6db0
+  - enabled: 1
     path: Assets/GameOver.unity
     guid: 8d8fee763a6a3f54d9471dee09c670e7
   - enabled: 1
