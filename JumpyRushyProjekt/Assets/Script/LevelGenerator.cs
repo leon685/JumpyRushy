@@ -8,13 +8,10 @@ public class LevelGenerator : MonoBehaviour {
     private GameObject[] aPlatforms;
     private GameObject[] aCoins;
 
-    public int x;
-    public int y;
-
     public GameObject coin;
     public int numberOfPlatforms;
     public int numberOfCoins;
-    public float xMin,xMax,yMin;
+    public float xMin,xMax;
 
     private float platformWidth;
     private GameObject newObject;
@@ -55,10 +52,43 @@ public class LevelGenerator : MonoBehaviour {
             newCoin=Instantiate(coin, new Vector3(p.transform.position.x, Random.Range(p.transform.position.y+1f, p.transform.position.y+3.5f)), coin.transform.rotation);
             aCoins[i] = newCoin;
         }
+        fix();
     }
 
-	// Update is called once per frame
-	void Update () {
+    private void fix()
+    {
+        bool finishPossible = false;
+        GameObject[] poljeCekinov=GameObject.FindGameObjectsWithTag("coinTag");  //returns GameObject[]
+        GameObject[] poljePlatform=GameObject.FindGameObjectsWithTag("platformTag");  //returns GameObject[]
+        GameObject finish=GameObject.FindGameObjectWithTag("finishTag");
+        for (int i=0; i < poljeCekinov.Length; i++)
+        {
+            for (int j=0; j < poljeCekinov.Length; j++)
+            {
+                if (i!=j && poljeCekinov[i].transform.position.x == poljeCekinov[j].transform.position.x)
+                {
+                    //Debug.Log("true" +i+ " " + j +" coords "+ poljeCekinov[i].transform.position.x + " od j "+poljeCekinov[j].transform.position.x);
+                    Destroy(poljeCekinov[j]);
+                }
+            }
+        }
+        for (int i=0; i<poljePlatform.Length; i++)
+        {
+            if (poljePlatform[i].transform.position.x >= finish.transform.position.x+1 && poljePlatform[i].transform.position.x <= finish.transform.position.x && poljePlatform[i].transform.position.y <= finish.transform.position.y && poljePlatform[i].transform.position.y >=finish.transform.position.y-2)
+            {
+                finishPossible = true;
+            }
+        }
+        if (!finishPossible)
+        {
+            Instantiate(platform, new Vector3(finish.transform.position.x,finish.transform.position.y-1.8f),platform.transform.rotation);
+        }
+
+
+    }
+
+    // Update is called once per frame
+    void Update () {
        
     }
 }
