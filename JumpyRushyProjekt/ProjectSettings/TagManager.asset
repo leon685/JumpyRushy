@@ -7,6 +7,7 @@ TagManager:
   - platformTag
   - coinTag
   - finishTag
+  - trap_spike
   layers:
   - Default
   - TransparentFX

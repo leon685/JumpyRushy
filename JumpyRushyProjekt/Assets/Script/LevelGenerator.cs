@@ -9,8 +9,10 @@ public class LevelGenerator : MonoBehaviour {
     private GameObject[] aCoins;
 
     public GameObject coin;
+    public GameObject spike;
     public int numberOfPlatforms;
     public int numberOfCoins;
+    public int numberOfSpikes;
     public float xMin,xMax;
 
     private float platformWidth;
@@ -32,12 +34,26 @@ public class LevelGenerator : MonoBehaviour {
         {
             float x2 = Random.Range(xMin, xMax);
             float y2 = Random.Range(platform.transform.position.y, tmp.transform.position.y + 1.5f);
-            tmp.transform.localScale = new Vector3(Random.Range(0.3f, 2f), tmp.transform.localScale.y, tmp.transform.localScale.z);
+            tmp.transform.localScale = new Vector3(Random.Range(0.5f, 2f), tmp.transform.localScale.y, tmp.transform.localScale.z);
             newObject = Instantiate(tmp, new Vector3(tmp.transform.position.x + x2, y2), tmp.transform.rotation);
             aPlatforms[i] = tmp;
             tmp = newObject;
         }
+        generateSpikes();
         generateCoins();
+    }
+
+    void generateSpikes()
+    {
+        GameObject p;
+        GameObject newSpike;
+
+        for (int i = 0; i < numberOfSpikes; i++)
+        {
+            int rndPlatform = Random.Range(1, (numberOfPlatforms - 1));
+            p = aPlatforms[rndPlatform];
+            newSpike = Instantiate(spike, new Vector3(Random.Range(p.transform.position.x-1, p.transform.position.x+(p.transform.localScale.x)), p.transform.position.y+0.5f), coin.transform.rotation);
+        }
     }
 
     void generateCoins()
@@ -47,7 +63,7 @@ public class LevelGenerator : MonoBehaviour {
 
         for (int i=0; i< numberOfCoins; i++)
         {
-            int rndPlatform = Random.Range(0, (numberOfPlatforms - 1));
+            int rndPlatform = Random.Range(1, (numberOfPlatforms - 1));
             p = aPlatforms[rndPlatform];
             newCoin=Instantiate(coin, new Vector3(p.transform.position.x, Random.Range(p.transform.position.y+1f, p.transform.position.y+3.5f)), coin.transform.rotation);
             aCoins[i] = newCoin;
@@ -57,7 +73,6 @@ public class LevelGenerator : MonoBehaviour {
 
     private void fix()
     {
-        bool finishPossible = false;
         GameObject[] poljeCekinov=GameObject.FindGameObjectsWithTag("coinTag");  //returns GameObject[]
         GameObject[] poljePlatform=GameObject.FindGameObjectsWithTag("platformTag");  //returns GameObject[]
         GameObject finish=GameObject.FindGameObjectWithTag("finishTag");
@@ -72,19 +87,18 @@ public class LevelGenerator : MonoBehaviour {
                 }
             }
         }
-        for (int i=0; i<poljePlatform.Length; i++)
+        GameObject tmp2 = new GameObject();
+        for (int i=1; i<poljePlatform.Length; i++)
         {
-            if (poljePlatform[i].transform.position.x >= finish.transform.position.x+1 && poljePlatform[i].transform.position.x <= finish.transform.position.x && poljePlatform[i].transform.position.y <= finish.transform.position.y && poljePlatform[i].transform.position.y >=finish.transform.position.y-2)
+            tmp2 = poljePlatform[i];
+            if (tmp2.transform.position.x < poljePlatform[i].transform.position.x)
             {
-                finishPossible = true;
+                tmp2 = poljePlatform[i];
             }
         }
-        if (!finishPossible)
-        {
-            Instantiate(platform, new Vector3(finish.transform.position.x,finish.transform.position.y-1.8f),platform.transform.rotation);
-        }
 
-
+        //Instantiate(finish, new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 0.8f), tmp2.transform.rotation);
+        finish.transform.position = new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 1.5f);
     }
 
     // Update is called once per frame
