@@ -434,7 +434,7 @@ MonoBehaviour:
   spike: {fileID: 1687716789668660, guid: 53747e795caa0fe4d83d2b7f61475c14, type: 2}
   numberOfPlatforms: 20
   numberOfCoins: 25
-  numberOfSpikes: 0
+  numberOfSpikes: 5
   xMin: 3
   xMax: 6
 --- !u!1 &223310167

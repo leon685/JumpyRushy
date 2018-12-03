@@ -34,7 +34,7 @@ public class LevelGenerator : MonoBehaviour {
         {
             float x2 = Random.Range(xMin, xMax);
             float y2 = Random.Range(platform.transform.position.y, tmp.transform.position.y + 1.5f);
-            tmp.transform.localScale = new Vector3(Random.Range(0.5f, 2f), tmp.transform.localScale.y, tmp.transform.localScale.z);
+            tmp.transform.localScale = new Vector3(Random.Range(1f, 2f), tmp.transform.localScale.y, tmp.transform.localScale.z);
             newObject = Instantiate(tmp, new Vector3(tmp.transform.position.x + x2, y2), tmp.transform.rotation);
             aPlatforms[i] = tmp;
             tmp = newObject;
@@ -75,6 +75,7 @@ public class LevelGenerator : MonoBehaviour {
     {
         GameObject[] poljeCekinov=GameObject.FindGameObjectsWithTag("coinTag");  //returns GameObject[]
         GameObject[] poljePlatform=GameObject.FindGameObjectsWithTag("platformTag");  //returns GameObject[]
+        GameObject[] poljePasti=GameObject.FindGameObjectsWithTag("trap_spike");  //returns GameObject[]
         GameObject finish=GameObject.FindGameObjectWithTag("finishTag");
         for (int i=0; i < poljeCekinov.Length; i++)
         {
@@ -87,6 +88,21 @@ public class LevelGenerator : MonoBehaviour {
                 }
             }
         }
+        for (int i=0; i<poljePasti.Length; i++)
+        {
+            for (int j=0; j<poljePasti.Length; j++)
+            {
+                Debug.Log("abs "+ (poljePasti[i].transform.position.x - poljePasti[j].transform.position.x));
+                if (i!=j && poljePasti[i].transform.position.x == poljePasti[j].transform.position.x || (poljePasti[i].transform.position.x-poljePasti[j].transform.position.x) < -0.6f && (poljePasti[i].transform.position.x - poljePasti[j].transform.position.x) > -3f)
+                {
+                    Destroy(poljePasti[j]);
+                }
+            }
+        }
+
+
+
+
         GameObject tmp2 = new GameObject();
         for (int i=1; i<poljePlatform.Length; i++)
         {
