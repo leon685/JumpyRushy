@@ -157,6 +157,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18c3577f4681c6d4e8d08c608e627aee, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1977743 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1147177977912992, guid: 18c3577f4681c6d4e8d08c608e627aee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1977742}
 --- !u!1 &101611608
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 203263430}
   - component: {fileID: 203263431}
+  - component: {fileID: 203263432}
   m_Layer: 0
   m_Name: Level Layout
   m_TagString: Untagged
@@ -424,7 +430,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 203263429}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5300d8163e5685a428f96dde5d67ff5d, type: 3}
   m_Name: 
@@ -437,6 +443,26 @@ MonoBehaviour:
   numberOfSpikes: 25
   xMin: 3
   xMax: 6
+--- !u!114 &203263432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 203263429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66dcdc9d9f235724985dc4bfd361e2ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c: {fileID: 1222161712820476, guid: 72aae7b99036e5a49ad2ba274f265d87, type: 2}
+  s: {fileID: 1687716789668660, guid: 53747e795caa0fe4d83d2b7f61475c14, type: 2}
+  f: {fileID: 1977743}
+  p: {fileID: 1646535200}
+  nP: 20
+  nC: 25
+  nS: 25
+  xMi: 3
+  xMa: 6
 --- !u!1 &223310167
 GameObject:
   m_ObjectHideFlags: 0
