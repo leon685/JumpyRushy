@@ -17,6 +17,7 @@ using UnityEngine.Networking;
 public class MainMenu : MonoBehaviour {
     
     public static bool accelerometer;
+    public static bool stopnjaStiskanja;
     public InputField username;
     public InputField password;
     public GameObject login;
@@ -223,7 +224,7 @@ public class MainMenu : MonoBehaviour {
         }
 
     }
-    
+
     void Start()
     {
         if (vse_ok)

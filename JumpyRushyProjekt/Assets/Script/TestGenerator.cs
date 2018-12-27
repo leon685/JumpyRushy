@@ -126,30 +126,50 @@ public class TestGenerator : MonoBehaviour
             forFit_s = 0;
             forFit_p = 0;
             forFit_c = 0;
-            for (int i = 0; i < aCoins.Count; i++)
+            List<GameObject> tmpC = new List<GameObject>();
+            for (int i = aCoins.Count-1; i >= 0; i--)
             {
-                for (int j = 0; j < aCoins.Count; j++)
+                for (int j = i; j >=0; j--)
                 {
-                    if (i != j && aCoins[i].transform.position.x == aCoins[j].transform.position.x)
+                    if (i != j && (aCoins[i].transform.position.x == aCoins[j].transform.position.x))
                     {
                         Destroy(aCoins[j]);
+                        aCoins[j].name = "delete";
                         //aCoins.RemoveAt(j);
                         forFit_c++;
                     }
                 }
+               
             }
-            for (int i = 0; i < aSpikes.Count; i++)
+            for (int i = aSpikes.Count-1; i >= 0; i--)
             {
-                for (int j = 0; j < aSpikes.Count; j++)
+                for (int j = i; j >= 0; j--)
                 {
                     if (i != j && aSpikes[i].transform.position.x == aSpikes[j].transform.position.x || (aSpikes[i].transform.position.x - aSpikes[j].transform.position.x) < -0.6f && (aSpikes[i].transform.position.x - aSpikes[j].transform.position.x) > -3f)
                     {
                         Destroy(aSpikes[j]);
-                        //aSpikes.RemoveAt(j);
+                        aSpikes[j].name = "delete";
+                        //aSpikes.RemoveAt(j);                      
                         forFit_s++;
                     }
                 }
             }
+
+            for (int i = aCoins.Count-1; i >= 0; i--)
+            {
+                if (aCoins[i].name == "delete")
+                {
+                    aCoins.RemoveAt(i);
+                }
+            }
+            for (int i = aSpikes.Count - 1; i >= 0; i--)
+            {
+                if (aSpikes[i].name == "delete")
+                {
+                    aSpikes.RemoveAt(i);
+                }
+            }
+
             GameObject tmp2=platform;
             for (int i = 0; i < aPlatforms.Count; i++)
             {
@@ -187,9 +207,9 @@ public class TestGenerator : MonoBehaviour
         }
         private void fitness()
         {
-            int diff_c = aCoins.Count - forFit_c;
-            int diff_p = aPlatforms.Count - forFit_p;
-            int diff_s = aSpikes.Count - forFit_s;
+            int diff_c = numberOfCoins - forFit_c;
+            int diff_p = numberOfPlatforms - forFit_p;
+            int diff_s = numberOfSpikes - forFit_s;
             fit = (diff_c + diff_s + diff_p);
             Debug.Log(diff_c + " "+ diff_s + " "+ diff_p);
             fit = fit / 100;
@@ -198,10 +218,44 @@ public class TestGenerator : MonoBehaviour
 
     void Start()
     {
-        pop_size levels= new pop_size(p,c,s,f,nP,nC,nS,xMi,xMa);
-        levels.startBuilding();
-        levels.display();
-        Debug.Log("Fitness: "+levels.fit);
+
+        //pop_size level= new pop_size(p,c,s,f,nP,nC,nS,xMi,xMa);
+        List<pop_size> levels = new List<pop_size>(); 
+        for (int i = 0; i < 100; i++)
+        {
+            levels.Add(new pop_size(p, c, s, f, nP, nC, nS, xMi, xMa));
+            levels[i].startBuilding();
+        }
+        //levels.display();
+
+        //najboljsega damo v polje
+        double max = 0;
+        int indeksMax = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            if (max < levels[i].fit)
+            {
+                max = levels[i].fit;
+                indeksMax = i;
+            }
+        }
+        List<pop_size> selekcija = new List<pop_size>();
+        selekcija.Add(levels[indeksMax]);
+        //random selekcija
+        for (int i = 0; i < 50; i++)
+        {
+            int rnd1 = Random.Range(0, levels.Count-1);
+            int rnd2 = Random.Range(0, levels.Count-1);
+            if (levels[rnd1].fit < levels[rnd2].fit)
+            {
+                selekcija.Add(levels[rnd2]);
+            }
+            else
+            {
+                selekcija.Add(levels[rnd1]);
+            }
+        }
+
     }
 
 

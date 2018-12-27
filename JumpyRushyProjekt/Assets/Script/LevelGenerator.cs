@@ -77,9 +77,9 @@ public class LevelGenerator : MonoBehaviour {
         GameObject[] poljePlatform=GameObject.FindGameObjectsWithTag("platformTag");  //returns GameObject[]
         GameObject[] poljePasti=GameObject.FindGameObjectsWithTag("trap_spike");  //returns GameObject[]
         GameObject finish=GameObject.FindGameObjectWithTag("finishTag");
-        for (int i=0; i < poljeCekinov.Length; i++)
+        for (int i=poljeCekinov.Length-1; i >=0; i++)
         {
-            for (int j=0; j < poljeCekinov.Length; j++)
+            for (int j=poljeCekinov.Length-1; j >=0; j++)
             {
                 if (i!=j && poljeCekinov[i].transform.position.x == poljeCekinov[j].transform.position.x)
                 {

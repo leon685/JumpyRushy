@@ -33,5 +33,6 @@ public class Timer : MonoBehaviour {
         }
         Debug.Log("hitrost= "+Controls.speed);
         text.text = min+":"+s;
-	}
+
+    }
 }
