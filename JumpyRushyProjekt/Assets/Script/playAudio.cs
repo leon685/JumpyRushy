@@ -10,13 +10,21 @@ public class playAudio : MonoBehaviour {
         {
             //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
             a.clip = Zvok.backgroundMusic;
-            a.loop = true;
+            a.loop = false;
+            a.Play();
+        }
+        else
+        {
             a.Play();
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (a.time > 33)
+        {
+            a.Stop();
+            a.Play();
+        }
 	}
 }
