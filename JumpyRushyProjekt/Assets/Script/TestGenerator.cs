@@ -28,6 +28,7 @@ public class TestGenerator : MonoBehaviour
         public GameObject spike;
         public GameObject finish;
         public GameObject platform;
+        public GameObject fin;
 
         public int forFit_s;
         public int forFit_c;
@@ -54,6 +55,7 @@ public class TestGenerator : MonoBehaviour
             numberOfSpikes = ns;
             xMin = xmi;
             xMax = xma;
+            fin = Instantiate(finish);
         }
 
         public void startBuilding()
@@ -76,7 +78,7 @@ public class TestGenerator : MonoBehaviour
             {
                 float x2 = Random.Range(xMin, xMax);
                 float y2 = Random.Range(platform.transform.position.y, tmp.transform.position.y + 1.5f);
-                tmp.transform.localScale = new Vector3(Random.Range(1f, 2f), tmp.transform.localScale.y, tmp.transform.localScale.z);
+                tmp.transform.localScale = new Vector3(Random.Range(1.5f, 2f), tmp.transform.localScale.y, tmp.transform.localScale.z);
 
                 tmp.transform.position = new Vector3(tmp.transform.position.x + x2, y2);
                 aPlatforms.Add(Instantiate(tmp) as GameObject);
@@ -93,7 +95,7 @@ public class TestGenerator : MonoBehaviour
             newSpike.active = false;
             for (int i = 0; i < numberOfSpikes; i++)
             {
-                int rndPlatform = Random.Range(1, (aPlatforms.Count - 1));
+                int rndPlatform = Random.Range(1, aPlatforms.Count);
                 p = aPlatforms[rndPlatform];
                 //newSpike = Instantiate(spike, new Vector3(Random.Range(p.transform.position.x - 1, p.transform.position.x + (p.transform.localScale.x)), p.transform.position.y + 0.5f), coin.transform.rotation);
                 newSpike.transform.position = new Vector3(Random.Range(p.transform.position.x - 1, p.transform.position.x + (p.transform.localScale.x)), p.transform.position.y + 0.5f);
@@ -110,7 +112,7 @@ public class TestGenerator : MonoBehaviour
             newCoin.active = false;
             for (int i = 0; i < numberOfCoins; i++)
             {
-                int rndPlatform = Random.Range(1, (aPlatforms.Count - 1));
+                int rndPlatform = Random.Range(1, aPlatforms.Count);
                 p = aPlatforms[rndPlatform];
                 //newCoin = Instantiate(coin, new Vector3(p.transform.position.x, Random.Range(p.transform.position.y + 1f, p.transform.position.y + 3.5f)), coin.transform.rotation);
                 newCoin.transform.position = new Vector3(p.transform.position.x, Random.Range(p.transform.position.y + 1f, p.transform.position.y + 3.5f));
@@ -145,7 +147,8 @@ public class TestGenerator : MonoBehaviour
             {
                 for (int j = i; j >= 0; j--)
                 {
-                    if (i != j && aSpikes[i].transform.position.x == aSpikes[j].transform.position.x || (aSpikes[i].transform.position.x - aSpikes[j].transform.position.x) < -0.6f && (aSpikes[i].transform.position.x - aSpikes[j].transform.position.x) > -3f)
+                    if (i != j && aSpikes[i].transform.position.x == aSpikes[j].transform.position.x 
+                        || (aSpikes[i].transform.position.x - aSpikes[j].transform.position.x) < -0.6f && (aSpikes[i].transform.position.x - aSpikes[j].transform.position.x) > -3f)
                     {
                         Destroy(aSpikes[j]);
                         aSpikes[j].name = "delete";
@@ -170,21 +173,18 @@ public class TestGenerator : MonoBehaviour
                 }
             }
 
-            GameObject tmp2=platform;
+            GameObject tmp2=aPlatforms[0];
+            fin.active = false;
             for (int i = 0; i < aPlatforms.Count; i++)
             {
-                if (i != 0)
-                {
-                    tmp2 = aPlatforms[i];
+                
                     if (tmp2.transform.position.x < aPlatforms[i].transform.position.x)
                     {
                         tmp2 = aPlatforms[i];
                     }
-                }
             }
             
-            //Instantiate(finish, new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 0.8f), tmp2.transform.rotation);
-            finish.transform.position = new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 1.5f);
+            fin.transform.position = new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 1.5f);
             //fitness();
         }
         public void display()
@@ -204,15 +204,47 @@ public class TestGenerator : MonoBehaviour
                 //Instantiate(levels.aPlatforms[i]);
                 aCoins[i].active = true;
             }
+            fin.active = true;
+
         }
-        private void fitness()
+        public void fitness()
         {
+            /*prestej se kolko je zaporednih spikeov na platformah? tisti ko ma manj zaporednih je bolši?*/
+            //al bi naredo v fix? da jih izbriše če so?
+            for (int i=0; i<aPlatforms.Count; i++)
+            {
+
+            }
+
             int diff_c = numberOfCoins - forFit_c;
             int diff_p = numberOfPlatforms - forFit_p;
             int diff_s = numberOfSpikes - forFit_s;
             fit = (diff_c + diff_s + diff_p);
             Debug.Log(diff_c + " "+ diff_s + " "+ diff_p);
             fit = fit / 100;
+        }
+        public void mutacija()
+        {
+            //add coin
+            GameObject p;
+            GameObject newCoin;
+            newCoin = Instantiate(coin);
+            newCoin.active = false;
+
+            int rndPlatform = Random.Range(1, aPlatforms.Count);
+            p = aPlatforms[rndPlatform];
+
+           newCoin.transform.position = new Vector3(p.transform.position.x, Random.Range(p.transform.position.y + 1f, p.transform.position.y + 3.5f));
+           aCoins.Add(Instantiate(newCoin));
+           newCoin.active = false; 
+        }
+        public void krizanje(pop_size k_with_me)
+        {
+
+        }
+        public void fixKrizanje()
+        {
+
         }
     }
 
@@ -239,13 +271,14 @@ public class TestGenerator : MonoBehaviour
                 indeksMax = i;
             }
         }
+        levels[indeksMax].display();
         List<pop_size> selekcija = new List<pop_size>();
         selekcija.Add(levels[indeksMax]);
         //random selekcija
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < levels.Count; i++)
         {
-            int rnd1 = Random.Range(0, levels.Count-1);
-            int rnd2 = Random.Range(0, levels.Count-1);
+            int rnd1 = Random.Range(0, levels.Count);
+            int rnd2 = Random.Range(0, levels.Count);
             if (levels[rnd1].fit < levels[rnd2].fit)
             {
                 selekcija.Add(levels[rnd2]);
@@ -255,7 +288,27 @@ public class TestGenerator : MonoBehaviour
                 selekcija.Add(levels[rnd1]);
             }
         }
-
+        //mutacija, add coin
+        for (int i=0; i<selekcija.Count; i++)
+        {
+            selekcija[i].mutacija();
+        }
+        ////krizanje
+        //for (int i=0; i<selekcija.Count; i++)
+        //{
+        //    int rnd = Random.Range(0, selekcija.Count);
+        //    selekcija[i].krizanje(selekcija[rnd]);
+        //}
+        ////popravljanje
+        //for (int i = 0; i < selekcija.Count; i++)
+        //{
+        //    selekcija[i].fixKrizanje();
+        //}
+        ////ovrednotenje
+        //for (int i = 0; i < selekcija.Count; i++)
+        //{
+        //    selekcija[i].fitness();
+        //}
     }
 
 

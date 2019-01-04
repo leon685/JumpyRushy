@@ -55,7 +55,30 @@ public class Zvok : MonoBehaviour {
             float tmp = sampleBuffer[i] * 32768.0f; //da dobim org vrednosti in ne med -1,1
             sampleBuffer[i] = tmp;
         }
-       
+
+        if (stopnja == 63)
+        {
+            int sgn = 0;
+            for (int i=0; i<sampleBuffer.Length; i++)
+            {
+                if (sampleBuffer[i] < 0)
+                {
+                    sgn = -1;
+                }
+                else if (sampleBuffer[i] == 0)
+                {
+                    sgn = 0;
+                }
+                else if (sampleBuffer[i] > 0)
+                {
+                    sgn = 1;
+                }
+                double rez = Math.Log(1 + 255 * Math.Abs(sampleBuffer[i])) / Math.Log(1 + 255);
+                float tmp = sampleBuffer[i];
+                sampleBuffer[i] = (float)sgn * (float)rez;
+                sampleBuffer[i] = sampleBuffer[i] * 128;
+            }
+        }
 
         int l = 0;
         int r = 0;
@@ -88,7 +111,7 @@ public class Zvok : MonoBehaviour {
         }
 
         /*writer*/
-        writer = new BinaryWriter(File.Open(Application.dataPath+"/cmp.wav", FileMode.Create));
+        writer = new BinaryWriter(File.Open(Application.persistentDataPath+"/cmp.wav", FileMode.Create));
 
         //short[] test = new short[12] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
@@ -308,7 +331,7 @@ public class Zvok : MonoBehaviour {
 
 
 
-        BinaryReader r = new BinaryReader(File.Open(Application.dataPath + "/cmp.wav", FileMode.Open));
+        BinaryReader r = new BinaryReader(File.Open(Application.persistentDataPath +"/cmp.wav", FileMode.Open));
         m = 0;
         int st = 0;
         /*glava*/
@@ -441,11 +464,35 @@ public class Zvok : MonoBehaviour {
                 l = true;
             }
         }
+
         //zapis wav datoteke
         float[] zaUnityZapis = new float[finalSignals.Count];
         for (int i=0; i<zaUnityZapis.Length; i++)
         {
-            zaUnityZapis[i] = finalSignals[i] / 32768.0F;
+            if (stopnja == 63)
+            {
+                float temp = finalSignals[i] / 128.0F;
+                int sgn = 0;
+                if (finalSignals[i] < 0)
+                {
+                    sgn = -1;
+                }
+                else if (finalSignals[i] == 0)
+                {
+                    sgn = 0;
+                }
+                else if (finalSignals[i] > 0)
+                {
+                    sgn = 1;
+                }
+                double rez = (1 / 255.0F) * (Math.Pow((1 + 255.0F), Math.Abs(temp)) - 1);
+                zaUnityZapis[i] = (float)sgn * (float)rez;
+                zaUnityZapis[i] = zaUnityZapis[i] / 32768.0F;
+            }
+            else
+            {
+                zaUnityZapis[i] = finalSignals[i] / 32768.0F;
+            }
         }
         backgroundMusic = AudioClip.Create("background", zaUnityZapis.Length, 2, fVzorcenja, false);
         backgroundMusic.SetData(zaUnityZapis, 0);

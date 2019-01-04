@@ -45,9 +45,19 @@ public class Controls : MonoBehaviour {
         charbody.velocity = new Vector2(speed, charbody.velocity.y);
         anim.SetBool("Grounded", onGround);
         //Debug.Log(Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))));
-        if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.15 && onGround && MainMenu.accelerometer==true) ||(Input.GetMouseButtonDown(0) && onGround))
+        if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.15 && Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) < 0.20 && onGround && MainMenu.accelerometer==true) ||(Input.GetMouseButtonDown(0) && onGround))
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 13);
+
+        }
+        else if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.20 && Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) <= 0.25 && onGround && MainMenu.accelerometer == true) || (Input.GetMouseButtonDown(0) && onGround))
+        {
+            charbody.velocity = new Vector2(charbody.velocity.x, 18);
+
+        }
+        else if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.8 && Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) < 0.15 && onGround && MainMenu.accelerometer == true) || (Input.GetMouseButtonDown(0) && onGround))
+        {
+            charbody.velocity = new Vector2(charbody.velocity.x, 8);
 
         }
         else
