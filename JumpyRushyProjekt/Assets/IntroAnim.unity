@@ -250,6 +250,8 @@ GameObject:
   m_Component:
   - component: {fileID: 203263430}
   - component: {fileID: 203263431}
+  - component: {fileID: 203263433}
+  - component: {fileID: 203263432}
   m_Layer: 0
   m_Name: Level Layout
   m_TagString: Untagged
@@ -307,6 +309,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 1846c471c079b2b409d0598e11a727c5, type: 3}
+--- !u!114 &203263432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 203263429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f530667e436a55840b8b3e9ce02d509a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: e1fc44a5abde8ef4d9f036f27b966b0a, type: 3}
+--- !u!114 &203263433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 203263429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1ffe088a7f19b4c870dd788874702d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: fdeab8312f460e143ad836b0c35778db, type: 3}
 --- !u!1 &223310167
 GameObject:
   m_ObjectHideFlags: 0

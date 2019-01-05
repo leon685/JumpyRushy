@@ -9,6 +9,7 @@ public class Controls : MonoBehaviour {
     public float groundCheckRadius;
     public LayerMask ground;
     private bool onGround;
+    public AudioSource a;
 
     float old_z;
     float z;
@@ -33,6 +34,10 @@ public class Controls : MonoBehaviour {
 
     }
     void Update () {
+        /*if (a.time >= 1)
+        {
+            a.Stop();
+        }*/
         onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, ground);
         Quaternion rot = new Quaternion(0, 0, 1, 0);
         z = Input.acceleration.z;
@@ -48,16 +53,53 @@ public class Controls : MonoBehaviour {
         if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.15 && Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) < 0.20 && onGround && MainMenu.accelerometer==true) ||(Input.GetMouseButtonDown(0) && onGround))
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 13);
-
+            a.Stop();
+            if (DCMPEffects.soundEffect1 != null) { 
+        
+                //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
+                a.clip = DCMPEffects.soundEffect1;
+                a.loop = false;
+                a.Play();
+            }
+            else
+            {
+                a.Play();
+            }
         }
         else if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.20 && Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) <= 0.25 && onGround && MainMenu.accelerometer == true) || (Input.GetMouseButtonDown(0) && onGround))
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 18);
+            a.Stop();
+            if (DCMPEffects.soundEffect1 != null)
+            {
+
+                //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
+                a.clip = DCMPEffects.soundEffect1;
+                a.loop = false;
+                a.Play();
+            }
+            else
+            {
+                a.Play();
+            }
 
         }
         else if ((Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) >= 0.8 && Mathf.Abs((Mathf.Abs(old_z) - Mathf.Abs(z))) < 0.15 && onGround && MainMenu.accelerometer == true) || (Input.GetMouseButtonDown(0) && onGround))
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 8);
+            a.Stop();
+            if (DCMPEffects.soundEffect1 != null)
+            {
+
+                //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
+                a.clip = DCMPEffects.soundEffect1;
+                a.loop = false;
+                a.Play();
+            }
+            else
+            {
+                a.Play();
+            }
 
         }
         else

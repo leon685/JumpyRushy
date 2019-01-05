@@ -14,7 +14,7 @@ public class LoadingFinished : MonoBehaviour {
         //Thread nit = new Thread(new ThreadStart(check));
         //nit.Start();
 
-        if (CompressAll.loadingDone)
+        if (CompressAll.loadingDone && CompressEffect1.loadingDoneEffect1 && CompressEffect2.loadingDoneEffect2)
         {
             SceneManager.LoadScene("Menu");
         }
