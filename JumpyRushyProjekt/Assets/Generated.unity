@@ -461,7 +461,7 @@ MonoBehaviour:
   p: {fileID: 1646535200}
   nP: 20
   nC: 25
-  nS: 15
+  nS: 10
   xMi: 3
   xMa: 6
 --- !u!114 &203263433

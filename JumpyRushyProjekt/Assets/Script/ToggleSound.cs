@@ -15,7 +15,6 @@ public class ToggleSound : MonoBehaviour {
 	void Start () {
         toggleGroupInstance=GetComponent<ToggleGroup>();
 	}
-
    public void onChangeToggle(bool t)
     {
         if (currentSelection.name == "lowq")

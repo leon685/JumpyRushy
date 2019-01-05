@@ -12,6 +12,6 @@ public class introAnimFinish : MonoBehaviour {
         {
             return;
         }
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Loading");
     }
 }
