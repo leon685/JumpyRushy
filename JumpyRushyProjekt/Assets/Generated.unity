@@ -572,8 +572,8 @@ MonoBehaviour:
   f: {fileID: 1977743}
   p: {fileID: 1646535200}
   nP: 20
-  nC: 25
-  nS: 10
+  nC: 20
+  nS: 5
   xMi: 3
   xMa: 6
 --- !u!114 &203263433
@@ -5543,6 +5543,48 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+--- !u!1001 &1963272297
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -11.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819416380787692, guid: 1653cace056315540948cad652a2934e, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1653cace056315540948cad652a2934e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1995570884
 GameObject:
   m_ObjectHideFlags: 0
