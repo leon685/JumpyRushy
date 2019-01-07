@@ -2842,6 +2842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 203263430}
   - component: {fileID: 203263431}
+  - component: {fileID: 203263432}
   m_Layer: 0
   m_Name: Level Layout
   m_TagString: Untagged
@@ -3241,6 +3242,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   a: {fileID: 1207068269}
+--- !u!114 &203263432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 203263429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08afbcc1dc88d174fb2cb26723f90762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &208315465
 GameObject:
   m_ObjectHideFlags: 0
