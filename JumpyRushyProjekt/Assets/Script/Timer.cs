@@ -21,6 +21,11 @@ public class Timer : MonoBehaviour {
 	void Update () {
         cas = cas + Time.deltaTime;
         cas_static = (int)cas;
+
+        if (!Classification.stop)
+        {
+            Classification.stC = cas_static;
+        }
         string min = ((int)cas / 60).ToString();
         string s = Mathf.Round((cas % 60)).ToString();
         if (Controls.speed < Controls.zacetna_hitrost)

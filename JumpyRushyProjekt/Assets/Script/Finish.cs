@@ -62,8 +62,9 @@ public class Finish : MonoBehaviour {
             if (MainMenu.vse_ok)
             {
                 TcpClient client = null;
-                string ip = "192.168.1.104";
+                string ip = "192.168.0.17";
                 int port = 1234;
+
                 string protokol_tocke = "T";
                 try
                 {
@@ -94,8 +95,13 @@ public class Finish : MonoBehaviour {
                     Debug.Log("Napaka:" + e);
                 }
                 //Time.timeScale = 1;
-
+                Classification.konecIgre = true;
+                Classification.opravilLevel = true;
             }
+            /*toDO zakomentiraj pol*/
+            Classification.konecIgre = true;
+            Classification.opravilLevel = true;
+
 
         }
     }

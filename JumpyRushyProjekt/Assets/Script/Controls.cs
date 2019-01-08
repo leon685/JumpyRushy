@@ -54,6 +54,10 @@ public class Controls : MonoBehaviour {
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 13);
             a.Stop();
+            if (!Classification.stop)
+            {
+                Classification.skoki++;
+            }
             if (DCMPEffects.soundEffect1 != null) { 
         
                 //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
@@ -70,6 +74,10 @@ public class Controls : MonoBehaviour {
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 18);
             a.Stop();
+            if (!Classification.stop)
+            {
+                Classification.skoki++;
+            }
             if (DCMPEffects.soundEffect1 != null)
             {
 
@@ -88,6 +96,10 @@ public class Controls : MonoBehaviour {
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 8);
             a.Stop();
+            if (!Classification.stop)
+            {
+                Classification.skoki++;
+            }
             if (DCMPEffects.soundEffect1 != null)
             {
 

@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour {
     public static string u_name;
     public static string p_word;
     private static bool vpisan,registriran;
-    string ip = "192.168.1.104";
+    string ip = "192.168.0.17";
     int port = 1234;
     string protokol_vpis = "V";
     string protokol_prijava = "P";

@@ -14,6 +14,10 @@ public class CekinTrigger : MonoBehaviour {
             return;
         }
         Score.DodajTocke(da_Tock);
+        if (!Classification.stop)
+        {
+            Classification.pobral++;
+        }
         a.Stop();
         if (DCMPEffects.soundEffect2 != null)
         {

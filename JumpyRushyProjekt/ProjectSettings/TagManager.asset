@@ -8,6 +8,7 @@ TagManager:
   - coinTag
   - finishTag
   - trap_spike
+  - trap_count
   layers:
   - Default
   - TransparentFX

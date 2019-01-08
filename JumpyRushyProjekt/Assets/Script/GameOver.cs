@@ -30,13 +30,16 @@ public class GameOver : MonoBehaviour {
         {
             StartCoroutine(fade(other.GetComponent<SpriteRenderer>()));
             charbody = other.GetComponent<Rigidbody2D>();
-           // charbody.velocity = new Vector2(charbody.velocity.x, 4);
+            // charbody.velocity = new Vector2(charbody.velocity.x, 4);
             Controls.speed = Controls.speed / 2;
             PowerUps.shield = false;
         }
         else
+        {
             //gameOverUI.SetActive(true);
+            Classification.konecIgre = true;
             SceneManager.LoadScene("GameOver");
+        }
     }
     IEnumerator fade(SpriteRenderer other)
     {

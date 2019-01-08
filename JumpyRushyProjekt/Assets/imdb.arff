@@ -1,0 +1,132 @@
+%	Name			Data Type	Meas	Description
+%	----			---------	-----	-----------
+%	Year			nominal				Release year
+%	Rating			nominal				imdb movie rating, 71 means 7.1 in imdb score
+%	Duration		nominal				duration of the movie 2=120min, 2+=more than 120minutes, 2-=less than 120 minutes
+%	Genre			nominal				action, adventure, biography, comedy, crime, drama, horror, mystery, sci-fi
+%	Ratings			nominal				how many people rated the movie, 100k-=less than 100.000, 100k+= more than 100.000 but less than 500.000, 500k+=more then 500.000 but less then 1.000.000, 1m+=more than 1.000.000
+%	Content_Rating 	nominal				/, PG, PG-13, R
+%	Class 			nominal				ok, good, very good, excellent
+
+%	Results
+%		Classifier: RandomForest
+%		Test options: Cross-validation Folds 10
+%		Correctly Classified Instances: 83%
+%		Tested atribute: Class
+%
+%Source
+%	https://www.imdb.com/list/ls005750764/?sort=user_rating,desc&st_dt=&mode=detail&page=1&release_date=2008%2C2018&ref_=ttls_ref_yr
+%
+%
+
+@RELATION movies
+
+@ATTRIBUTE year		      {2008,2009,2010,2011}
+@ATTRIBUTE rating 	      {71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90}
+@ATTRIBUTE duration       {2,2+,2-}
+@ATTRIBUTE genre	      {Action,Adventure,Biography,Comedy,Crime,Drama,Horror,Mystery,Sci-Fi}
+@ATTRIBUTE ratings    	  {1M+,500K+,100K+,100K-}
+@ATTRIBUTE content_rating {/,PG,PG-13,R}
+@ATTRIBUTE class		  {OK,GOOD,VERY_GOOD,EXCELLENT}
+
+@DATA
+2008,78,2+,Drama,500K+,PG-13,VERY_GOOD
+2009,78,2+,Action,1M+,PG-13,VERY_GOOD
+2009,76,2+,Action,100K+,R,VERY_GOOD
+2009,79,2+,Crime,100K-,R,GOOD
+2009,83,2+,Adventure,1M+,R,EXCELLENT
+2008,90,2+,Action,1M+,PG-13,EXCELLENT
+2009,78,2+,Crime,100K+,R,GOOD
+2008,74,2+,Action,100K-,R,OK
+2010,88,2+,Action,1M+,PG-13,EXCELLENT
+2009,73,2+,Crime,100K-,R,OK
+2008,74,2+,Action,100K-,R,OK
+2009,76,2+,Action,100K-,/,OK
+2008,78,2+,Biography,100K+,R,GOOD
+2008,73,2+,Action,100K-,R,OK
+2010,81,2+,Mystery,500K+,R,VERY_GOOD
+2008,72,2+,Action,100K+,R,GOOD
+2009,74,2+,Comedy,100K-,R,OK
+2009,72,2+,Drama,100K-,R,OK
+2009,73,2+,Biography,100K+,PG-13,GOOD
+2008,72,2+,Biography,100K-,/,OK
+2010,77,2+,Biography,100K-,/,OK
+2008,75,2+,Action,100K-,R,OK
+2009,77,2+,Drama,100K-,R,OK
+2008,76,2+,Drama,100K+,R,VERY_GOOD
+2008,81,2+,Drama,100K-,PG-13,GOOD
+2008,73,2+,Action,100K-,/,OK
+2008,76,2+,Crime,100K-,/,OK
+2009,77,2+,Biography,100K+,PG-13,VERY_GOOD
+2009,82,2+,Drama,100K+,R,GOOD
+2009,72,2+,Crime,100K-,R,OK
+2009,78,2+,Crime,100K-,R,OK
+2009,76,2+,Action,500K+,PG-13,VERY_GOOD
+2008,71,2+,Action,100K+,R,GOOD
+2008,76,2+,Biography,100K+,R,GOOD
+2010,72,2+,Drama,100K+,PG-13,GOOD
+2008,75,2+,Drama,100K-,PG-13,OK
+2009,80,2+,Action,500K+,PG-13,VERY_GOOD
+2009,71,2+,Crime,100K+,PG-13,GOOD
+2009,72,2+,Adventure,100K-,R,OK
+2009,72,2+,Drama,100K-,R,OK
+2008,79,2+,Action,500K+,PG-13,VERY_GOOD
+2008,74,2+,Adventure,100K-,/,OK
+2010,76,2+,Crime,100K+,R,VERY_GOOD
+2008,79,2+,Action,100K-,/,GOOD
+2008,76,2+,Drama,100K+,R,GOOD
+2008,75,2+,Comedy,100K-,R,OK
+2008,76,2+,Drama,100K+,PG-13,VERY_GOOD
+2008,77,2+,Biography,100K-,R,OK
+2008,71,2+,Drama,100K+,PG-13,GOOD
+2008,80,2,Drama,500K+,R,VERY_GOOD
+2010,77,2,Biography,500K+,PG-13,VERY_GOOD
+2008,73,2-,Drama,100K+,R,GOOD
+2008,73,2-,Action,100K-,/,OK
+2008,73,2-,Crime,100K-,/,OK
+2010,76,2-,Action,100K+,R,VERY_GOOD
+2009,73,2-,Biography,100K-,PG,OK
+2008,81,2-,Drama,500K+,R,VERY_GOOD
+2009,72,2-,Comedy,100K-,/,OK
+2008,79,2-,Drama,100K+,R,GOOD
+2008,76,2-,Drama,100K-,/,OK
+2008,73,2-,Action,100K+,R,GOOD
+2008,76,2-,Action,100K-,R,OK
+2009,79,2-,Sci-Fi,500K+,R,VERY_GOOD
+2009,73,2-,Adventure,100K+,R,GOOD
+2008,73,2-,Crime,100K+,/,GOOD
+2009,76,2-,Drama,100K-,/,OK
+2009,74,2-,Drama,100K+,R,VERY_GOOD
+2008,79,2-,Drama,100K+,R,VERY_GOOD
+2009,74,2-,Crime,100K+,R,GOOD
+2009,74,2-,Drama,100K-,PG-13,OK
+2010,76,2-,Action,100K-,R,OK
+2008,72,2-,Crime,100K-,R,OK
+2008,79,2-,Comedy,100K+,R,VERY_GOOD
+2008,76,2-,Drama,100K-,/,OK
+2008,80,2-,Action,100K+,R,GOOD
+2010,78,2-,Drama,100K-,/,OK
+2009,71,2-,Drama,100K+,R,GOOD
+2008,75,2-,Drama,100K+,PG-13,GOOD
+2008,75,2-,Crime,100K-,R,OK
+2009,77,2-,Comedy,500K+,R,VERY_GOOD
+2010,72,2-,Drama,100K+,R,GOOD
+2009,73,2-,Drama,100K+,PG-13,GOOD
+2008,73,2-,Comedy,100K-,/,OK
+2008,71,2-,Horror,100K-,R,OK
+2009,71,2-,Adventure,100K-,PG-13,OK
+2009,71,2-,Comedy,100K-,R,OK
+2009,76,2-,Biography,100K-,R,OK
+2009,79,2-,Drama,100K+,R,VERY_GOOD
+2010,71,2-,Drama,100K-,R,OK
+2008,72,2-,Comedy,100K-,R,OK
+2008,72,2-,Crime,100K-,R,OK
+2008,71,2-,Drama,100K+,PG-13,GOOD
+2008,76,2-,Biography,100K-,/,OK
+2009,77,2-,Comedy,100K+,PG-13,VERY_GOOD
+2010,76,2-,Adventure,100K+,R,VERY_GOOD
+2008,78,2-,Drama,100K+,PG-13,GOOD
+2008,78,2-,Action,500K+,PG-13,VERY_GOOD
+2011,75,2-,Mystery,100K+,PG-13,VERY_GOOD
+2009,72,2-,Comedy,100K-,PG-13,OK
+2009,77,2-,Adventure,100K+,R,VERY_GOOD
