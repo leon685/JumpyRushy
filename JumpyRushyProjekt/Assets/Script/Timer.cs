@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour {
         {
             Controls.speed += Time.deltaTime * (pospesek*8);
         }
-        else if (Controls.speed>=Controls.zacetna_hitrost && Controls.speed < max)
+        else if (Controls.speed>=Controls.zacetna_hitrost && Controls.speed < max_hitrost)
         {
             Controls.speed += Time.deltaTime * pospesek;
         }

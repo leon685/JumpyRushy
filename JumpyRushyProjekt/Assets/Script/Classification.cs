@@ -31,7 +31,7 @@ public class Classification : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (/*MainMenu.vse_ok &&*/ konecIgre == true)
+        if (MainMenu.vse_ok && konecIgre == true)
         {
             TcpClient client = null;
             string ip = "192.168.0.17";
@@ -51,12 +51,12 @@ public class Classification : MonoBehaviour {
                 byte[] message = new byte[100];
                 dataStream.Read(message, 0, message.Length);
                 string strMessage2 = Encoding.UTF8.GetString(message);
-                string odziv = strMessage2.Split('|')[0];
-                Debug.Log("Dobil sem sporočilo: " + odziv);
-                if (odziv == "OK SUINZ")
+                string o = strMessage2.Split('|')[0];
+                Debug.Log("Dobil sem sporočilo: " + o);
+                if (o == "OK SUINZ")
                 {
 
-                    Debug.Log("tocke vstavljene");
+                    Debug.Log("Classification good");
                 }
                 dataStream.Close(); 
                 client.Close();     
@@ -78,9 +78,9 @@ public class Classification : MonoBehaviour {
             return;
         }
         stop = true;
-
+        
         //kliči predikcijo
-        if (/*MainMenu.vse_ok &&*/ true)
+        if (MainMenu.vse_ok)
         {
             Thread nit = new Thread(new ThreadStart(predict));
             nit.Start();
@@ -107,7 +107,14 @@ public class Classification : MonoBehaviour {
             dataStream.Read(message, 0, message.Length);
             string strMessage2 = Encoding.UTF8.GetString(message);
             string odziv = strMessage2.Split('|')[0];
-            Debug.Log("Dobil sem sporočilo: " + odziv);
+            int rez = Convert.ToInt32(odziv);
+            if (rez == 0)
+            {
+                Controls.speed = 5;
+                Controls.zacetna_hitrost = 5;
+                Timer.max_hitrost = 5;
+            }
+
             dataStream.Close();
             client.Close();
         }
