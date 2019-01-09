@@ -44,7 +44,39 @@ public class Controls : MonoBehaviour {
         //Debug.Log("x " +Input.acceleration.x);
         //Debug.Log("y " + Input.acceleration.y);
         //Debug.Log("z " + Input.acceleration.z);
-        //Debug.Log("gyro: " + Input.gyro.attitude*rot);
+        Debug.Log("gyro: " + Input.gyro.attitude.x + " " + Input.gyro.attitude.y + " " + Input.gyro.attitude.z);
+
+        int st = 0;
+
+        List<double> vrX = new List<double>();
+        List<double> vrY = new List<double>();
+        List<double> vrZ = new List<double>();
+
+        double[] gyroVR = new double[3];
+        vrX.Add(Input.gyro.attitude.x);
+        vrY.Add(Input.gyro.attitude.y);
+        vrZ.Add(Input.gyro.attitude.z);
+        if (vrX.Count == 3)
+        {
+            double Ps = (vrX[0] + vrX[1] + vrX[2]) / vrX.Count;
+            double Pn = Ps * 0.66 + Input.gyro.attitude.x * 0.33;
+            gyroVR[0] = Pn;
+            vrX.Clear();
+        }
+        if (vrY.Count == 3)
+        {
+            double Ps = (vrY[0] + vrY[1] + vrY[2]) / vrY.Count;
+            double Pn = Ps * 0.66 + Input.gyro.attitude.y * 0.33;
+            gyroVR[1] = Pn;
+            vrY.Clear();
+        }
+        if (vrZ.Count == 3)
+        {
+            double Ps = (vrZ[0] + vrZ[1] + vrZ[2]) / vrZ.Count;
+            double Pn = Ps * 0.66 + Input.gyro.attitude.z * 0.33;
+            gyroVR[2] = Pn;
+            vrZ.Clear();
+        }
 
 
         charbody.velocity = new Vector2(speed, charbody.velocity.y);

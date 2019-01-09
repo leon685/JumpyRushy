@@ -572,7 +572,7 @@ MonoBehaviour:
   f: {fileID: 1977743}
   p: {fileID: 1646535200}
   nP: 20
-  nC: 20
+  nC: 15
   nS: 5
   xMi: 3
   xMa: 6

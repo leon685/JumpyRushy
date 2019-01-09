@@ -15,6 +15,7 @@ public class TestGenerator : MonoBehaviour
     public int nS;
     public float xMi, xMa;
 
+    public static int popaj = 0;
     private float platformWidth;
 
     // Use this for initialization
@@ -209,16 +210,13 @@ public class TestGenerator : MonoBehaviour
         }
         public void fitness()
         {
-            for (int i=0; i<aPlatforms.Count; i++)
-            {
-
-            }
-
-            int diff_c = numberOfCoins - forFit_c;
-            int diff_p = numberOfPlatforms - forFit_p;
-            int diff_s = numberOfSpikes - forFit_s;
+            //int diff_c = numberOfCoins - forFit_c;
+            //int diff_p = numberOfPlatforms - forFit_p;
+            //int diff_s = numberOfSpikes - forFit_s;
+            int diff_c = aCoins.Count;
+            int diff_p = aPlatforms.Count;
+            int diff_s = aSpikes.Count;
             fit = (diff_c + diff_s + diff_p);
-            //Debug.Log(diff_c + " "+ diff_s + " "+ diff_p);
             fit = fit / (numberOfCoins + numberOfPlatforms + numberOfSpikes);
         }
         public void mutacija()
@@ -235,8 +233,52 @@ public class TestGenerator : MonoBehaviour
            newCoin.transform.position = new Vector3(p.transform.position.x, Random.Range(p.transform.position.y + 1f, p.transform.position.y + 3.5f));
            aCoins.Add(Instantiate(newCoin));
            newCoin.active = false;
-           forFit_c--;
         }
+
+        public void fixKrizanje()
+        {
+           
+
+            double platformDiff = Mathf.Abs(aPlatforms[(aPlatforms.Count / 2) - 1].transform.position.x - aPlatforms[(aPlatforms.Count / 2)].transform.position.x);
+
+            //add platform if difference to big
+            if (platformDiff > 8)
+            {
+                GameObject tmp = Instantiate(platform) as GameObject;
+                tmp.active = false;
+               
+                tmp.transform.localScale = new Vector3(Random.Range(1f, 1.5f), tmp.transform.localScale.y, tmp.transform.localScale.z);
+
+                float middleY = aPlatforms[(aPlatforms.Count / 2) - 1].transform.position.y + aPlatforms[(aPlatforms.Count / 2)].transform.position.y;
+                middleY = middleY / 2.0f;
+                float middleX = aPlatforms[(aPlatforms.Count / 2) - 1].transform.position.x + aPlatforms[(aPlatforms.Count / 2)].transform.position.x;
+                middleX = middleX / 2.0f;
+
+
+                tmp.transform.position = new Vector3(middleX, middleY-1f);
+                aPlatforms.Add(Instantiate(tmp) as GameObject);
+                tmp.active = false;
+            }
+
+            //double spikeX = aSpikes[aSpikes.Count / 2].transform.position.x;
+            //double spikeY = aSpikes[aSpikes.Count / 2].transform.position.y;
+
+            /*GameObject tmp2 = aPlatforms[0];
+            fin.active = false;
+            for (int i = 0; i < aPlatforms.Count; i++)
+            {
+
+                if (tmp2.transform.position.x < aPlatforms[i].transform.position.x)
+                {
+                    tmp2 = aPlatforms[i];
+                }
+            }
+
+            fin.transform.position = new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 1.5f);
+            */
+            fix();
+        }
+
         public void krizanje(pop_size k_with_me)
         {
             //drugo polovico od k_with_me zamenjaj z prvotnim levelom
@@ -264,45 +306,66 @@ public class TestGenerator : MonoBehaviour
             int coinIndex = aCoins.FindIndex(a => a.transform.position.x > aPlatforms[aPlatforms.Count-1].transform.position.x);
             int spikeIndex = aSpikes.FindIndex(a => a.transform.position.x > aPlatforms[aPlatforms.Count-1].transform.position.x);
 
-            for (int i = coinIndex; i < aCoins.Count; i++)
+            if (coinIndex != -1)
             {
-                Destroy(aCoins[i]);
-            }
-            aCoins.RemoveRange(coinIndex, aCoins.Count-coinIndex);
-            
-            for (int i = spikeIndex; i < aSpikes.Count; i++)
-            {
-                Destroy(aSpikes[i]);
-            }
-            aSpikes.RemoveRange(spikeIndex, aSpikes.Count - spikeIndex);
+                for (int i = coinIndex; i < aCoins.Count; i++)
+                {
 
+                    Destroy(aCoins[i]);
+                }
+                aCoins.RemoveRange(coinIndex, aCoins.Count - coinIndex);
+            }
+            if (spikeIndex != -1)
+            {
+                for (int i = spikeIndex; i < aSpikes.Count; i++)
+                {
+
+                    Destroy(aSpikes[i]);
+                }
+                aSpikes.RemoveRange(spikeIndex, aSpikes.Count - spikeIndex);
+            }
 
             //dodaj polovico od drugega
 
+            int drugiLevelPlatformIndex = k_with_me.aPlatforms.FindIndex(a => a.transform.position.x > aPlatforms[aPlatforms.Count - 1].transform.position.x);
             int drugiLevelCoinsIndex = k_with_me.aCoins.FindIndex(a => a.transform.position.x > aPlatforms[aPlatforms.Count - 1].transform.position.x);
             int drugiLevelSpikesIndex = k_with_me.aSpikes.FindIndex(a => a.transform.position.x > aPlatforms[aPlatforms.Count - 1].transform.position.x);
-            for (int i = (k_with_me.aPlatforms.Count / 2); i < k_with_me.aPlatforms.Count; i++)
+            if (drugiLevelPlatformIndex != -1)
             {
-                aPlatforms.Add(Instantiate(k_with_me.aPlatforms[i]));
-            }
-            for (int i = drugiLevelCoinsIndex; i < k_with_me.aCoins.Count; i++)
-            {
-                aCoins.Add(Instantiate(k_with_me.aCoins[i]));
-            }
-            for (int i = drugiLevelSpikesIndex; i < k_with_me.aSpikes.Count; i++)
-            {
-                aSpikes.Add(Instantiate(k_with_me.aSpikes[i]));
-            }
-        }
-        public void fixKrizanje()
-        {
+                for (int i = drugiLevelPlatformIndex; i < k_with_me.aPlatforms.Count; i++)
+                {
+                    aPlatforms.Add(Instantiate(k_with_me.aPlatforms[i]));
+                    //Debug.Log("4i: " + i);
 
+                }
+            }
+            if (drugiLevelCoinsIndex != -1)
+            {
+                for (int i = drugiLevelCoinsIndex; i < k_with_me.aCoins.Count; i++)
+                {
+                    //Debug.Log("5i: " + i);
+                    aCoins.Add(Instantiate(k_with_me.aCoins[i]));
+
+                }
+            }
+            if (drugiLevelSpikesIndex != -1)
+            {
+                for (int i = drugiLevelSpikesIndex; i < k_with_me.aSpikes.Count; i++)
+                {
+                    //Debug.Log("6i: " + i);
+                    aSpikes.Add(Instantiate(k_with_me.aSpikes[i]));
+
+                }
+            }
+            fixKrizanje();
+            fitness();
         }
+        
     }
 
     void Start()
     {
-
+        Debug.Log("testTESTETSTES");
         //pop_size level= new pop_size(p,c,s,f,nP,nC,nS,xMi,xMa);
         List<pop_size> levels = new List<pop_size>(); 
         for (int i = 0; i < 100; i++)
@@ -328,7 +391,7 @@ public class TestGenerator : MonoBehaviour
         selekcija.Add(levels[indeksMax]);
 
         //random selekcija, izberemo dva, noter damo boljšega
-        for (int i = 0; i < levels.Count; i++)
+        for (int i = 0; i < levels.Count-1; i++)
         {
             int rnd1 = Random.Range(0, levels.Count);
             int rnd2 = Random.Range(0, levels.Count);
@@ -349,21 +412,36 @@ public class TestGenerator : MonoBehaviour
         //krizanje
         //for (int i=0; i<selekcija.Count; i++)
        // {
-            int rnd = Random.Range(0, selekcija.Count);
+        //    int rnd = Random.Range(0, selekcija.Count);
         Debug.Log("fit:" + selekcija[0].fit);
-            selekcija[0].krizanje(selekcija[rnd]);
-        selekcija[0].display();
-        //}
-        ////popravljanje
-        //for (int i = 0; i < selekcija.Count; i++)
-        //{
-        //    selekcija[i].fixKrizanje();
-        //}
-        ////ovrednotenje
-        //for (int i = 0; i < selekcija.Count; i++)
-        //{
-        //    selekcija[i].fitness();
-        //}
+        Debug.Log("Statistika: " + selekcija[0].aPlatforms.Count + " " + selekcija[0].aCoins.Count + " " + selekcija[0].aSpikes.Count);
+
+        //selekcija[0].krizanje(selekcija[rnd]);
+        //selekcija[0].display();
+        //Debug.Log("2fit:" + selekcija[0].fit);
+        //Debug.Log("22Statistika: " + selekcija[0].aPlatforms.Count + " " + selekcija[0].aCoins.Count + " " + selekcija[0].aSpikes.Count);
+        ////}
+        int r= new int();
+        List<int> indexi = new List<int>();
+        for (int i = 0; i < 100; i++)
+        {
+            r = Random.Range(0, selekcija.Count);
+            selekcija[i].krizanje(selekcija[r]);
+
+        }
+        max = 0;
+        indeksMax = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            if (max < selekcija[i].fit)
+            {
+                max = selekcija[i].fit;
+                indeksMax = i;
+            }
+        }
+        selekcija[indeksMax].display();
+        Debug.Log("2fit:" + selekcija[indeksMax].fit);
+        Debug.Log("22Statistika: " + selekcija[indeksMax].aPlatforms.Count + " " + selekcija[indeksMax].aCoins.Count + " " + selekcija[indeksMax].aSpikes.Count);
     }
 
 
