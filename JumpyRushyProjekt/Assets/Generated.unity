@@ -489,7 +489,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 203263430}
-  - component: {fileID: 203263431}
   - component: {fileID: 203263432}
   - component: {fileID: 203263433}
   m_Layer: 0
@@ -537,25 +536,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &203263431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 203263429}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5300d8163e5685a428f96dde5d67ff5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platform: {fileID: 1646535200}
-  coin: {fileID: 1222161712820476, guid: 72aae7b99036e5a49ad2ba274f265d87, type: 2}
-  spike: {fileID: 1687716789668660, guid: 53747e795caa0fe4d83d2b7f61475c14, type: 2}
-  numberOfPlatforms: 20
-  numberOfCoins: 25
-  numberOfSpikes: 25
-  xMin: 3
-  xMax: 6
 --- !u!114 &203263432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,9 +551,6 @@ MonoBehaviour:
   s: {fileID: 1687716789668660, guid: 53747e795caa0fe4d83d2b7f61475c14, type: 2}
   f: {fileID: 1977743}
   p: {fileID: 1646535200}
-  nP: 20
-  nC: 15
-  nS: 5
   xMi: 3
   xMa: 6
 --- !u!114 &203263433

@@ -54,8 +54,8 @@ public class Finish : MonoBehaviour {
             
             //if(2*(int)Timer.cas_static<Score.score*0.5)
             tt_time = 2 * (int)Timer.cas_static;
-            Score.score -= 2*(int)Timer.cas_static;
-            Debug.Log("-"+(2*(int)Timer.cas_static));
+            Score.score -= 1*(int)Timer.cas_static;
+            Debug.Log("-"+(1*(int)Timer.cas_static));
             panel.SetActive(true);
             Time.timeScale = 0;
 

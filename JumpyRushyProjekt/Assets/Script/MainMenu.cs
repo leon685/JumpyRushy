@@ -20,6 +20,14 @@ public class MainMenu : MonoBehaviour {
     public static bool stopnjaStiskanja;
     public InputField username;
     public InputField password;
+    public InputField nPlatforms;
+    public InputField nCoins;
+    public InputField nSpikes;
+
+    public static int stPlatform;
+    public static int stCekinov;
+    public static int stPasti;
+
     public GameObject login;
     public GameObject main;
     public GameObject panel;
@@ -172,6 +180,10 @@ public class MainMenu : MonoBehaviour {
     }
     public void GeneratedPlay()
     {
+        stPlatform = Convert.ToInt32(nPlatforms.text);
+        stCekinov = Convert.ToInt32(nCoins.text); ;
+        stPasti = Convert.ToInt32(nSpikes.text);
+
         SceneManager.LoadScene("Generated");
     }
     public void PlayGame()

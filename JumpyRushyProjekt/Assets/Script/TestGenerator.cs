@@ -10,9 +10,9 @@ public class TestGenerator : MonoBehaviour
     public GameObject f;
     public GameObject p;
 
-    public int nP;
-    public int nC;
-    public int nS;
+    int nP;
+    int nC;
+    int nS;
     public float xMi, xMa;
 
     public static int popaj = 0;
@@ -277,6 +277,17 @@ public class TestGenerator : MonoBehaviour
             fin.transform.position = new Vector3(tmp2.transform.position.x, tmp2.transform.position.y + 1.5f);
             */
             fix();
+
+            for (int i=0; i<aSpikes.Count; i++)
+            {
+                for (int j=0; j<aPlatforms.Count; j++)
+                {
+                    if (aSpikes[i].transform.position.x >= (aPlatforms[j].transform.position.x - 1) && aSpikes[i].transform.position.x <= (aPlatforms[j].transform.position.x+1))
+                    {
+                        aSpikes[i].transform.position = new Vector3(aSpikes[i].transform.position.x, aPlatforms[j].transform.position.y + 0.5f);
+                    }
+                }
+            }
         }
 
         public void krizanje(pop_size k_with_me)
@@ -365,7 +376,17 @@ public class TestGenerator : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("testTESTETSTES");
+        nP = MainMenu.stPlatform;
+        nC = MainMenu.stCekinov;
+        nS = MainMenu.stPasti;
+
+        if (nP <= 0)
+        {
+            nP = 20;
+            nC = 15;
+            nS = 5;
+        }
+
         //pop_size level= new pop_size(p,c,s,f,nP,nC,nS,xMi,xMa);
         List<pop_size> levels = new List<pop_size>(); 
         for (int i = 0; i < 100; i++)
