@@ -76,87 +76,91 @@ public class CompressAll : MonoBehaviour {
                 fName = "/nizkaCMP.wav";
             }
 
-
-
-            left = new int[sampleBuffer.Length / 2];
-            right = new int[sampleBuffer.Length / 2];
-            M = new int[left.Length];
-            S = new int[right.Length];
-
-            if (stopnja == 63)
+            if (!File.Exists(dataPath + fName))
             {
-                int sgn = 0;
-                for (int i = 0; i < sampleBuffer.Length; i++)
+
+
+                left = new int[sampleBuffer.Length / 2];
+                right = new int[sampleBuffer.Length / 2];
+                M = new int[left.Length];
+                S = new int[right.Length];
+
+                if (stopnja == 63)
                 {
-                    if (sampleBuffer[i] < 0)
+                    int sgn = 0;
+                    for (int i = 0; i < sampleBuffer.Length; i++)
                     {
-                        sgn = -1;
+                        if (sampleBuffer[i] < 0)
+                        {
+                            sgn = -1;
+                        }
+                        else if (sampleBuffer[i] == 0)
+                        {
+                            sgn = 0;
+                        }
+                        else if (sampleBuffer[i] > 0)
+                        {
+                            sgn = 1;
+                        }
+                        double rez = Math.Log(1 + 255 * Math.Abs(sampleBuffer[i])) / Math.Log(1 + 255);
+                        float tmp = sampleBuffer[i];
+                        sampleBuffer[i] = (float)sgn * (float)rez;
+                        sampleBuffer[i] = sampleBuffer[i] * 128;
                     }
-                    else if (sampleBuffer[i] == 0)
-                    {
-                        sgn = 0;
-                    }
-                    else if (sampleBuffer[i] > 0)
-                    {
-                        sgn = 1;
-                    }
-                    double rez = Math.Log(1 + 255 * Math.Abs(sampleBuffer[i])) / Math.Log(1 + 255);
-                    float tmp = sampleBuffer[i];
-                    sampleBuffer[i] = (float)sgn * (float)rez;
-                    sampleBuffer[i] = sampleBuffer[i] * 128;
                 }
+
+                int l = 0;
+                int r = 0;
+                //delitev kanalov
+                for (int i = 0; i < sampleBuffer.Length; i = i + 2)
+                {
+                    left[l] = (int)sampleBuffer[i];
+                    l++;
+                }
+                for (int i = 1; i < sampleBuffer.Length; i = i + 2)
+                {
+                    right[r] = (int)sampleBuffer[i];
+                    r++;
+                }
+
+                n = 0;
+                blok = new List<double>();
+                X = new List<List<double>>();
+                aBit = new bool[8];
+                bitArray = new BitArray(8);
+                glava = false;
+                /*M in S*/
+                for (int i = 0; i < M.Length; i++)
+                {
+                    M[i] = (short)((left[i] + right[i]) / 2);
+                    S[i] = (short)((left[i] - right[i]) / 2);
+                }
+
+                /*writer*/
+                writer = new BinaryWriter(File.Open(dataPath + fName, FileMode.Create));
+
+                //short[] test = new short[12] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+
+                //kompresija
+                cmp(M);
+                cmp(S);
+
+                /*KONEC*/
+                if (n < 8)
+                {
+                    bitArray = new BitArray(aBit);
+                    byte byteZapis = ConvertToByte(bitArray);
+                    writer.Write(byteZapis);
+                    writer.Close();
+                }
+                else
+                    writer.Close();
+                //Debug.Log("Done");
+                //next = true;
+                //AudioSource.PlayClipAtPoint(clip, new Vector3(0, 0, 0), 1.0f);
             }
-
-            int l = 0;
-            int r = 0;
-            //delitev kanalov
-            for (int i = 0; i < sampleBuffer.Length; i = i + 2)
-            {
-                left[l] = (int)sampleBuffer[i];
-                l++;
-            }
-            for (int i = 1; i < sampleBuffer.Length; i = i + 2)
-            {
-                right[r] = (int)sampleBuffer[i];
-                r++;
-            }
-
-            n = 0;
-            blok = new List<double>();
-            X = new List<List<double>>();
-            aBit = new bool[8];
-            bitArray = new BitArray(8);
-            glava = false;
-            /*M in S*/
-            for (int i = 0; i < M.Length; i++)
-            {
-                M[i] = (short)((left[i] + right[i]) / 2);
-                S[i] = (short)((left[i] - right[i]) / 2);
-            }
-
-            /*writer*/
-            writer = new BinaryWriter(File.Open(dataPath + fName, FileMode.Create));
-
-            //short[] test = new short[12] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-
-            //kompresija
-            cmp(M);
-            cmp(S);
-
-            /*KONEC*/
-            if (n < 8)
-            {
-                bitArray = new BitArray(aBit);
-                byte byteZapis = ConvertToByte(bitArray);
-                writer.Write(byteZapis);
-                writer.Close();
-            }
-            else
-                writer.Close();
-            //Debug.Log("Done");
-            //next = true;
-            //AudioSource.PlayClipAtPoint(clip, new Vector3(0, 0, 0), 1.0f);
             st++;
+
         }
         loadingDone = true;
     }
