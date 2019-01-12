@@ -17,8 +17,8 @@ namespace TMPro.Examples
         private TextContainer m_textContainer;
         private TextMesh m_textMesh;
 
-        private const string label01 = "The <#0050FF>count is: </color>{0}";
-        private const string label02 = "The <color=#0050FF>count is: </color>";
+        private const string label01 = "The <#0030FF>count is: </color>{0}";
+        private const string label02 = "The <color=#0030FF>count is: </color>";
 
         //private string m_string;
         //private int m_frame;

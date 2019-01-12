@@ -30,9 +30,9 @@ public class Finish : MonoBehaviour {
             Debug.Log(Score.score);
             if (PowerUps.shield == true)
             {
-                Score.score += 50;
-                Debug.Log("+50");
-                tt_shield = 50;
+                Score.score += 30;
+                Debug.Log("+30");
+                tt_shield = 30;
             }
             else
             {
@@ -40,9 +40,9 @@ public class Finish : MonoBehaviour {
             }
             if (Controls.speed >= Timer.max_hitrost)
             {
-                Score.score += 50;
-                Debug.Log("+50");
-                tt_speed = 50;
+                Score.score += 30;
+                Debug.Log("+30");
+                tt_speed = 30;
 
             }
             else if (Controls.speed < Timer.max_hitrost)

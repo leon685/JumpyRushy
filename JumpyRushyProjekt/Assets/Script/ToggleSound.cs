@@ -19,11 +19,11 @@ public class ToggleSound : MonoBehaviour {
     {
         if (currentSelection.name == "lowq")
         {
-            stopnja_zvok = 63;
+            stopnja_zvok = 55;
         }
         else if (currentSelection.name == "mediumq")
         {
-            stopnja_zvok = 50;
+            stopnja_zvok = 30;
         }
         else if (currentSelection.name == "highq")
         {

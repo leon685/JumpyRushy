@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class CompressEffect1 : MonoBehaviour
 {
     public AudioClip clip;
+    public static AudioClip orgEF1clip;
     List<double> blok;
     int N = 64;
     BinaryWriter writer;
@@ -29,6 +30,7 @@ public class CompressEffect1 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        orgEF1clip = clip;
         sampleBuffer = new float[clip.samples * clip.channels];
         clip.GetData(sampleBuffer, 0);
         dataPath = Application.persistentDataPath;
@@ -39,7 +41,7 @@ public class CompressEffect1 : MonoBehaviour
             sampleBuffer[i] = tmp;
         }
         Thread nit = new Thread(new ThreadStart(startCMP));
-        //Thread nitSrednja = new Thread(() => startCMP(50, "/srednjaCMP.wav"));
+        //Thread nitSrednja = new Thread(() => startCMP(30, "/srednjaCMP.wav"));
         nit.Start();
         Debug.Log("MAIN FINISH");
     }
@@ -70,12 +72,12 @@ public class CompressEffect1 : MonoBehaviour
             }
             else if (st == 2)
             {
-                stopnja = 50;
+                stopnja = 30;
                 fName = "/srednjaE1CMP.wav";
             }
             else if (st == 3)
             {
-                stopnja = 63;
+                stopnja = 55;
                 fName = "/nizkaE1CMP.wav";
             }
 
@@ -86,7 +88,7 @@ public class CompressEffect1 : MonoBehaviour
             M = new int[left.Length];
             S = new int[right.Length];
 
-            if (stopnja == 63)
+            if (stopnja == 55)
             {
                 int sgn = 0;
                 for (int i = 0; i < sampleBuffer.Length; i++)

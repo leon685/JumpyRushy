@@ -37,7 +37,7 @@ public class CompressAll : MonoBehaviour {
             sampleBuffer[i] = tmp;
         }
         Thread nit = new Thread(new ThreadStart(startCMP));
-        //Thread nitSrednja = new Thread(() => startCMP(50, "/srednjaCMP.wav"));
+        //Thread nitSrednja = new Thread(() => startCMP(30, "/srednjaCMP.wav"));
         nit.Start();
         Debug.Log("MAIN FINISH");
 	}
@@ -67,12 +67,12 @@ public class CompressAll : MonoBehaviour {
                 fName = "/visokaCMP.wav";
             }else if (st == 2)
             {
-                stopnja = 50;
+                stopnja = 30;
                 fName = "/srednjaCMP.wav";
             }
             else if (st == 3)
             {
-                stopnja = 63;
+                stopnja = 55;
                 fName = "/nizkaCMP.wav";
             }
 
@@ -85,7 +85,7 @@ public class CompressAll : MonoBehaviour {
                 M = new int[left.Length];
                 S = new int[right.Length];
 
-                if (stopnja == 63)
+                if (stopnja == 55)
                 {
                     int sgn = 0;
                     for (int i = 0; i < sampleBuffer.Length; i++)

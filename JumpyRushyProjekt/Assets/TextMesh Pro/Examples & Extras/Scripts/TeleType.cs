@@ -10,7 +10,7 @@ namespace TMPro.Examples
 
 
         //[Range(0, 100)]
-        //public int RevealSpeed = 50;
+        //public int RevealSpeed = 30;
 
         private string label01 = "Example <sprite=2> of using <sprite=7> <#ffa000>Graphics Inline</color> <sprite=5> with Text in <font=\"Bangers SDF\" material=\"Bangers SDF - Drop Shadow\">TextMesh<#40a0ff>Pro</color></font><sprite=0> and Unity<sprite=1>";
         private string label02 = "Example <sprite=2> of using <sprite=7> <#ffa000>Graphics Inline</color> <sprite=5> with Text in <font=\"Bangers SDF\" material=\"Bangers SDF - Drop Shadow\">TextMesh<#40a0ff>Pro</color></font><sprite=0> and Unity<sprite=2>";
@@ -36,7 +36,7 @@ namespace TMPro.Examples
             //    canvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 
             //    // Set RectTransform Size
-            //    gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 300);
+            //    gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 300);
             //    m_textMeshPro.fontSize = 48;
             //}
 

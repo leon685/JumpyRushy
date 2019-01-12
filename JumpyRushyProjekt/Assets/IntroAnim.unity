@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f530667e436a55840b8b3e9ce02d509a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: e1fc44a5abde8ef4d9f036f27b966b0a, type: 3}
+  clip: {fileID: 8300000, guid: d74463fe76c181648864cbcab5a9703e, type: 3}
 --- !u!114 &203263433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: fdeab8312f460e143ad836b0c35778db, type: 3}
+  orgEF1clip: {fileID: 8300000, guid: fdeab8312f460e143ad836b0c35778db, type: 3}
 --- !u!1 &223310167
 GameObject:
   m_ObjectHideFlags: 0

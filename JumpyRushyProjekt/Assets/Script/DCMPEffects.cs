@@ -83,11 +83,11 @@ public class DCMPEffects : MonoBehaviour
             string name = "/cmp.wav";
             if (st_ponovitev == 1)
             {
-                if (ToggleSound.stopnja_zvok == 63)
+                if (ToggleSound.stopnja_zvok == 55)
                 {
                     name = "/nizkaE1CMP.wav";
                 }
-                else if (ToggleSound.stopnja_zvok == 50)
+                else if (ToggleSound.stopnja_zvok == 30)
                 {
                     name = "/srednjaE1CMP.wav";
                 }
@@ -98,11 +98,11 @@ public class DCMPEffects : MonoBehaviour
             }
             if (st_ponovitev == 2)
             {
-                if (ToggleSound.stopnja_zvok == 63)
+                if (ToggleSound.stopnja_zvok == 55)
                 {
                     name = "/nizkaE2CMP.wav";
                 }
-                else if (ToggleSound.stopnja_zvok == 50)
+                else if (ToggleSound.stopnja_zvok == 30)
                 {
                     name = "/srednjaE2CMP.wav";
                 }
@@ -150,7 +150,7 @@ public class DCMPEffects : MonoBehaviour
                 //polje za koeficient
 
                 boolKoeficient = new bool[dejanskaDolzina]; //potrebna vel
-                bool[] fullK = new bool[64];   //polna velikost (64bitov)-zaradi komplementa, max dolzina (63?)
+                bool[] fullK = new bool[64];   //polna velikost (64bitov)-zaradi komplementa, max dolzina (55?)
                                                /*beremo koeficient do dolzine*/
                 for (int i = 0; i < dejanskaDolzina; i++)
                 {
@@ -249,7 +249,7 @@ public class DCMPEffects : MonoBehaviour
             float[] zaUnityZapis = new float[finalSignals.Count];
             for (int i = 0; i < zaUnityZapis.Length; i++)
             {
-                if (stopnja == 63)
+                if (stopnja == 55)
                 {
                     float temp = finalSignals[i] / 128.0F;
                     int sgn = 0;

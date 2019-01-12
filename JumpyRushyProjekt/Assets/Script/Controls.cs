@@ -93,7 +93,10 @@ public class Controls : MonoBehaviour {
             if (DCMPEffects.soundEffect1 != null) { 
         
                 //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
-                a.clip = DCMPEffects.soundEffect1;
+                if (ToggleSound.stopnja_zvok == 0)
+                    a.clip = CompressEffect1.orgEF1clip;
+                else
+                    a.clip = DCMPEffects.soundEffect1;
                 a.loop = false;
                 a.Play();
             }
@@ -114,8 +117,10 @@ public class Controls : MonoBehaviour {
             {
 
                 //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
-                a.clip = DCMPEffects.soundEffect1;
-                a.loop = false;
+                if (ToggleSound.stopnja_zvok == 0)
+                    a.clip = CompressEffect1.orgEF1clip;
+                else
+                    a.clip = DCMPEffects.soundEffect1; a.loop = false;
                 a.Play();
             }
             else
@@ -136,8 +141,10 @@ public class Controls : MonoBehaviour {
             {
 
                 //AudioSource.PlayClipAtPoint(Zvok.backgroundMusic, new Vector3(0, 0, 0), 1.0f);
-                a.clip = DCMPEffects.soundEffect1;
-                a.loop = false;
+                if (ToggleSound.stopnja_zvok == 0)
+                    a.clip = CompressEffect1.orgEF1clip;
+                else
+                    a.clip = DCMPEffects.soundEffect1; a.loop = false;
                 a.Play();
             }
             else
