@@ -16,10 +16,12 @@ public class Controls : MonoBehaviour {
     public float hitrost;
     static public float zacetna_hitrost;
     static public float speed;
-    List<double> vrX = new List<double>();
+
     List<double> vrY = new List<double>();
-    List<double> vrZ = new List<double>();
+    float glajanjeY;
+
     private Animator anim;
+    int st = 1;
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
@@ -43,57 +45,49 @@ public class Controls : MonoBehaviour {
         onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, ground);
         Quaternion rot = new Quaternion(0, 0, 1, 0);
         y = Input.acceleration.y;
-        int st = 0;
 
         Debug.Log("y: "+Input.acceleration.y);
 
-        //double[] gyroVR = new double[3];
-        //vrX.Add(Input.acceleration.x);
         //vrY.Add(Input.acceleration.y);
-        //vrZ.Add(Input.acceleration.z);
-        //if (vrX.Count == 3)
-        //{
-        //    double Ps = (vrX[0] + vrX[1] + vrX[2]) / vrX.Count;
-        //    double Pn = Ps * 0.66 + Input.acceleration.x * 0.33;
-        //    gyroVR[0] = Pn;
-        //    vrX.Clear();
-        //}
+      
         //if (vrY.Count == 3)
         //{
+        //    if (st <= 2)
+        //    {
+        //        st++;
+        //    }
         //    double Ps = (vrY[0] + vrY[1] + vrY[2]) / vrY.Count;
         //    double Pn = Ps * 0.66 + Input.acceleration.y * 0.33;
-        //    gyroVR[1] = Pn;
-        //    old_y = (float)gyroVR[1];
-        //    Debug.Log("y: " + gyroVR[0] + " org: " + Input.acceleration.y);
+        //    glajanjeY = (float)Pn;
+        //    y = glajanjeY;
         //    vrY.Clear();
+        //    if (st == 1)
+        //        old_y = glajanjeY;
         //}
-        //if (vrZ.Count == 3)
-        //{
-        //    double Ps = (vrZ[0] + vrZ[1] + vrZ[2]) / vrZ.Count;
-        //    double Pn = Ps * 0.66 + Input.acceleration.z * 0.33;
-        //    gyroVR[2] = Pn;
-        //    vrZ.Clear();
-        //}
+       
 
         charbody.velocity = new Vector2(speed, charbody.velocity.y);
         anim.SetBool("Grounded", onGround);
         float diffY = Mathf.Abs(y) - Mathf.Abs(old_y);
         Debug.Log("diffY: " + diffY);
-        if (diffY >= 0.3f)
-        {
-            Debug.Log("oldY: "+ old_y + " newY:"+ y);
-            hJump = true;
-        }
-        else if (diffY >= 0.15f)
-        {
-            Debug.Log("oldY: " + old_y + " newY:" + y);
-            nJump = true;
-        }
-        else if (diffY >= 0.5f)
-        {
-            Debug.Log("oldY: " + old_y + " newY:" + y);
-            sJump = true;
-        }
+        //if (st >=2)
+        //{
+            if (diffY >= 0.3f)
+            {
+                Debug.Log("oldY: " + old_y + " newY:" + y);
+                hJump = true;
+            }
+            else if (diffY >= 0.15f)
+            {
+                Debug.Log("oldY: " + old_y + " newY:" + y);
+                nJump = true;
+            }
+            else if (diffY >= 0.5f)
+            {
+                Debug.Log("oldY: " + old_y + " newY:" + y);
+                sJump = true;
+            }
+        //}
         if ((nJump && onGround && MainMenu.accelerometer==true) ||(Input.GetMouseButtonDown(0) && onGround))
         {
             charbody.velocity = new Vector2(charbody.velocity.x, 13);
