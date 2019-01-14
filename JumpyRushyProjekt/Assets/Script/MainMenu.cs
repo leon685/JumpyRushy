@@ -102,7 +102,7 @@ public class MainMenu : MonoBehaviour {
             invalid.SetActive(true);
         }
         /*NetworkClient a= new NetworkClient();
-        a.Connect("192.168.1.104", 1234);
+        a.Connect("192.168.0.17", 1234);
         if (a.isConnected)
         {
             Debug.Log("connected");

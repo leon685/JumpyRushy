@@ -22,7 +22,7 @@ public class Leaderboards : MonoBehaviour {
     void Start () {
 
         TcpClient client = null;
-        string ip = "192.168.1.104";
+        string ip = "192.168.0.17";
         int port = 1234;
         string protokol_lestvica = "L";
         string ime1, t1, ime2, t2, ime3, t3, ime4, t4, ime5, t5;

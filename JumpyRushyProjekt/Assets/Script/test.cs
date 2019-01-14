@@ -34,7 +34,7 @@ public class test : MonoBehaviour {
     private WebCamTexture frontCam;
     // private Image<Bgr, byte> currentFrameBgr;
     // private Image<Bgr, byte> frame;
-    string ip = "192.168.1.104";
+    string ip = "192.168.0.17";
     int port = 1234;
     string protokol_vpis = "V";
     string protokol_prijava = "P";
